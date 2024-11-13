@@ -5,8 +5,10 @@ from fastcrud import crud_router
 from src.config.db import get_session, lifespan
 from src.models.categoria import Categoria
 from src.models.despesa import Despesa
-from src.schemas.categoria_schemas import CategoriaCreate, CategoriaResponse
-from src.schemas.despesas_schemas import DespesaCreate, DespesaResponse
+from src.models.movimentacao import Movimentacao
+from src.schemas.categoria_schemas import CategoriaCreate
+from src.schemas.despesas_schemas import DespesaCreate
+from src.schemas.movimentacao_schemas import MovimentacaoCreate
 
 app = FastAPI(lifespan=lifespan)
 
@@ -32,5 +34,17 @@ despesa_router = crud_router(
     tags=["Despesas"]
 )
 
+movimentacao_crud = FastCRUD(Movimentacao)
+movimentacao_router = crud_router(
+    session=get_session,
+    model=Movimentacao,
+    create_schema=MovimentacaoCreate,
+    update_schema=MovimentacaoCreate,
+    crud=movimentacao_crud,
+    path="/movimentacoes",
+    tags=["Movimentações"]
+)
+
 app.include_router(categoria_router)
 app.include_router(despesa_router)
+app.include_router(movimentacao_router)
