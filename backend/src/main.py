@@ -6,9 +6,12 @@ from src.config.db import get_session, lifespan
 from src.models.categoria import Categoria
 from src.models.despesa import Despesa
 from src.models.movimentacao import Movimentacao
+from src.models.anotacao import Anotacao
+
 from src.schemas.categoria_schemas import CategoriaCreate
 from src.schemas.despesas_schemas import DespesaCreate
 from src.schemas.movimentacao_schemas import MovimentacaoCreate
+from src.schemas.anotacao_schemas import AnotacaoCreate
 
 app = FastAPI(lifespan=lifespan)
 
@@ -45,6 +48,18 @@ movimentacao_router = crud_router(
     tags=["Movimentações"]
 )
 
+anotacao_crud = FastCRUD(Anotacao)
+anotacao_router = crud_router(
+    session=get_session,
+    model=Anotacao,
+    create_schema=AnotacaoCreate,
+    update_schema=AnotacaoCreate,
+    crud=anotacao_crud,
+    path="/anotacoes",
+    tags=["Anotações"]
+)
+
 app.include_router(categoria_router)
 app.include_router(despesa_router)
 app.include_router(movimentacao_router)
+app.include_router(anotacao_router)
