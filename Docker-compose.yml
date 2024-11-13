@@ -1,0 +1,40 @@
+services:
+  api:
+    build: ./backend
+    ports:
+      - "8001:8000"
+    environment:
+      - DATABASE_URL=postgresql+asyncpg://postgres:postgres@db:5432/postgres
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - dasher_net
+  
+  db:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - dasher_net
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    
+    # Fazer o serviço do front end
+  
+volumes:
+  db_data:
+
+networks:
+  dasher_net:
+    driver: bridge
