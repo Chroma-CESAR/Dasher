@@ -1,7 +1,7 @@
 from pydantic import BaseModel, Field
 
 class MetodoPagamentoBase(BaseModel):
-    nome: str = Field(..., example="Cartão Final 0001",description="Nome do método de pagamento")
+    metodo: str = Field(..., example="Cartão Final 0001",description="Nome do método de pagamento")
 
 class MetodoPagamentoCreate(MetodoPagamentoBase):
     pass

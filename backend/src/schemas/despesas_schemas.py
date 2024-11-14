@@ -9,11 +9,8 @@ class DespesaBase(BaseModel):
     valor: Decimal = Field(..., example="150.75", description="Valor da despesa")
     categoria_id: int = Field(None, example=1, description="ID da categoria associada")
     data_pagamento: Optional[date] = Field(None, example="2024-11-13", description="Data de pagamento, se realizada")
-    metodo_pagamento: str = Field(
-        None, 
-        example="Debito", 
-        description="Método de pagamento usado (Debito ou Crédito)",
-        pattern="^(Debito|Crédito)$"  # Mudança de regex para pattern
+    metodo_pagamento_id: int = Field(
+        None, example="1", description="Método de pagamento usado"
     )
 
 
