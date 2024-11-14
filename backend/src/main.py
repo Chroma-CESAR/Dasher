@@ -3,15 +3,18 @@ from fastcrud import FastCRUD
 from fastcrud import crud_router
 
 from src.config.db import get_session, lifespan
+
 from src.models.categoria import Categoria
 from src.models.despesa import Despesa
 from src.models.movimentacao import Movimentacao
 from src.models.anotacao import Anotacao
+from src.models.metodo_pagamento import MetodoPagamento
 
 from src.schemas.categoria_schemas import CategoriaCreate
 from src.schemas.despesas_schemas import DespesaCreate
 from src.schemas.movimentacao_schemas import MovimentacaoCreate
 from src.schemas.anotacao_schemas import AnotacaoCreate
+from src.schemas.metodo_pagamento_schemas import MetodoPagamentoCreate
 
 app = FastAPI(lifespan=lifespan)
 
@@ -59,7 +62,19 @@ anotacao_router = crud_router(
     tags=["Anotações"]
 )
 
+metodo_pagamento_crud = FastCRUD(MetodoPagamento)
+metodo_pagamento_router = crud_router(
+    session=get_session,
+    model=MetodoPagamento,
+    create_schema=MetodoPagamentoCreate,
+    update_schema=MetodoPagamentoCreate,
+    crud=metodo_pagamento_crud,
+    path="/metodos_pagamento",
+    tags=["Metodos de Pagamento"]
+)
+
 app.include_router(categoria_router)
 app.include_router(despesa_router)
 app.include_router(movimentacao_router)
 app.include_router(anotacao_router)
+app.include_router(metodo_pagamento_router)

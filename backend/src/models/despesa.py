@@ -19,7 +19,10 @@ class Despesa(Base):
     valor = Column(Numeric(10, 2), nullable=False)
     categoria_id = Column(Integer, ForeignKey("categoria.id"), nullable=False)
     data_pagamento = Column(Date)
-    metodo_pagamento = Column(String, CheckConstraint("metodo_pagamento IN ('Debito', 'Crédito')"), nullable=False)
+    metodo_pagamento_id = Column(Integer, ForeignKey("metodo_pagamento.id"), nullable=False)
 
     # Relacionamento com categoria
     categoria = relationship("Categoria", back_populates="despesas")
+
+    # Relacionamento com método de pagamento
+    metodo_pagamento = relationship("MetodoPagamento", back_populates="despesas")
