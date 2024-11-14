@@ -1,4 +1,6 @@
 from fastapi import FastAPI
+from fastapi.responses import JSONResponse
+from sqlalchemy.exc import IntegrityError, NoResultFound
 from fastcrud import FastCRUD
 from fastcrud import crud_router
 
@@ -72,6 +74,28 @@ metodo_pagamento_router = crud_router(
     path="/metodos_pagamento",
     tags=["Metodos de Pagamento"]
 )
+
+# Tratamento de erros
+@app.exception_handler(Exception)
+async def generic_exception_handler(request, exc):
+    return JSONResponse(
+        status_code=500,
+        content={"detail": "An unexpected error occurred"},
+    )
+
+@app.exception_handler(IntegrityError)
+async def integrity_error_handler(request, exc):
+    return JSONResponse(
+        status_code=400,
+        content={"detail": "Database integrity error occurred"},
+    )
+
+@app.exception_handler(NoResultFound)
+async def no_result_found_handler(request, exc):
+    return JSONResponse(
+        status_code=404,
+        content={"detail": "No result found"},
+    )
 
 app.include_router(categoria_router)
 app.include_router(despesa_router)
