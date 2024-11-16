@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
-import SideBarComplete from "./components/SideBar/SideBarComplete";
+import SideBarComplete from "../components/SideBar/SideBarComplete";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
