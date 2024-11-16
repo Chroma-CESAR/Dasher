@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
-import SideBarComplete from "../components/SideBar/SideBarComplete";
+import SideBarComplete from "@/components/SideBar/SideBarComplete";
+import Header from "@/components/Header";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -33,10 +34,13 @@ export default function RootLayout({
   return (
     <html lang="pt-br">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${montserrat.variable} antialiased flex`}
+        className={`${geistSans.variable} ${geistMono.variable} ${montserrat.variable} antialiased flex overflow-y-hidden`}
       >
         <SideBarComplete />
-        {children}
+        <div className="flex flex-col w-full">
+          <Header />
+          {children}
+        </div>
       </body>
     </html>
   );
