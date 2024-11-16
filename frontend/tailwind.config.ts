@@ -16,7 +16,8 @@ const config: Config = {
   				DEFAULT: 'hsl(var(--primary))',
   				foreground: 'hsl(var(--primary-foreground))'
   			},
-  			'primary-container': '#00a6a7',
+			'primary-color': '#00696A',
+  			'primary-container': '#9CF1F1',
   			'on-primary': '#ffffff',
   			'on-primary-container': '#002020',
   			'secondary-color': '#4a6363',
