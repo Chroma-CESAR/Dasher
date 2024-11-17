@@ -1,8 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { Button } from "../ui/button";
-import { PlusCircle } from "lucide-react";
+import ModalOperacao from "../ModalOperacao";
 
 export default function Header() {
   const pathname = usePathname();
@@ -13,13 +12,7 @@ export default function Header() {
         {pathname != "/" ? pathname : "DashBoard"}
       </h1>
 
-      <Button
-        className="bg-primary-container text-on-primary hover:bg-primary-color"
-        onClick={() => console.log("Nova Operação")}
-      >
-        <PlusCircle size={24} />
-        Nova Operação
-      </Button>
+      <ModalOperacao />
     </nav>
   );
 }
