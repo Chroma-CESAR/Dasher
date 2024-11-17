@@ -22,8 +22,8 @@ export default function SideBarComplete() {
         <div className="flex flex-col justify-between h-full">
           <SideBar.List>
             <SideBar.Item name="Dashboard" icon={LayoutDashboard} to="/" />
-            <SideBar.Item name="Planilha" icon={FileSpreadsheet} to="/" />
-            <SideBar.Item name="Dicionário" icon={Library} to="/" />
+            <SideBar.Item name="Planilha" icon={FileSpreadsheet} to="/planilha" />
+            <SideBar.Item name="Dicionário" icon={Library} to="/dicionario" />
           </SideBar.List>
           <SideBar.List>
             <SideBar.Item name="Conta" icon={PersonStanding} />
