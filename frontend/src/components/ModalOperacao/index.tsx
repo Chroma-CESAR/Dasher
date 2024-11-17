@@ -122,8 +122,37 @@ export default function ModalOperacao() {
                         </span>
                         <Input
                           placeholder="__/__/____"
-                          {...field}
                           className="pl-10 border-on-surface"
+                          {...field}
+                          onChange={(
+                            e: React.ChangeEvent<HTMLInputElement>
+                          ) => {
+                            let value = e.target.value;
+
+                            // Remove qualquer caractere não numérico
+                            value = value.replace(/\D/g, "");
+
+                            // Adiciona as barras conforme o formato
+                            if (value.length <= 2) {
+                              value = value.replace(
+                                /(\d{2})(\d{0,2})/,
+                                "$1/$2"
+                              );
+                            } else if (value.length <= 4) {
+                              value = value.replace(
+                                /(\d{2})(\d{2})(\d{0,2})/,
+                                "$1/$2/$3"
+                              );
+                            } else {
+                              value = value.replace(
+                                /(\d{2})(\d{2})(\d{4})(\d{0,2})/,
+                                "$1/$2/$3"
+                              );
+                            }
+
+                            // Chama o onChange original de react-hook-form
+                            field.onChange(value);
+                          }}
                         />
                       </div>
                     </FormControl>
@@ -146,7 +175,22 @@ export default function ModalOperacao() {
                         <span className="absolute inset-y-0 left-3 flex items-center text-gray-500">
                           <File />
                         </span>
-                        <Input {...field} className="border-on-surface pl-10" />
+                        <Input
+                          {...field} // Spread de todas as propriedades do field
+                          className="border-on-surface pl-10"
+                          value={field.value} // Mantém o valor
+                          onChange={(
+                            e: React.ChangeEvent<HTMLInputElement>
+                          ) => {
+                            let value = e.target.value;
+
+                            // Remove qualquer caractere não numérico
+                            value = value.replace(/[^0-9.,-]/g, "");
+
+                            // Chama o onChange original de react-hook-form
+                            field.onChange(value);
+                          }}
+                        />
                       </div>
                     </FormControl>
                     <FormDescription className="text-xs text-gray-500">
@@ -193,7 +237,21 @@ export default function ModalOperacao() {
                         <span className="absolute inset-y-0 left-3 flex items-center text-gray-500">
                           <BadgeDollarSign />
                         </span>
-                        <Input {...field} className="pl-10 border-on-surface" />
+                        <Input
+                          {...field}
+                          className="pl-10 border-on-surface"
+                          onChange={(
+                            e: React.ChangeEvent<HTMLInputElement>
+                          ) => {
+                            let value = e.target.value;
+
+                            // Remove qualquer caractere não numérico
+                            value = value.replace(/[^0-9.,-]/g, "");
+
+                            // Chama o onChange original de react-hook-form
+                            field.onChange(value);
+                          }}
+                        />
                       </div>
                     </FormControl>
                   </FormItem>
