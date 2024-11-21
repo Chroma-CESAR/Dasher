@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import axiosInstance from "@/utils/axios";
 import {
   Dialog,
   DialogContent,
@@ -52,9 +53,31 @@ export default function ModalOperacao() {
     },
   });
 
-  const onSubmit = (data: OperationFormData) => {
-    console.log("Form Data:", data);
-    // Fazer a requisição para a API
+  const onSubmit = async (data: OperationFormData) => {
+    const payload = {
+      data_movimentacao: new Date(
+        data.operationDate.split("/").reverse().join("/")
+      )
+        .toISOString()
+        .split("T")[0],
+      numero_documento: data.documentNumber,
+      descricao: data.description,
+      tipo_operacao: data.operationType === "credit" ? "Crédito" : "Débito",
+      valor: parseFloat(data.operationValue).toFixed(2),
+      banco: data.bank || "",
+    };
+
+    console.log("Payload:", payload);
+
+    try {
+      await axiosInstance.post("/movimentacoes", payload);
+      alert("Operação cadastrada com sucesso!");
+    } catch (error) {
+      console.error("Erro ao cadastrar operação:", error);
+      alert(
+        "Erro ao cadastrar operação. Verifique o console para mais detalhes."
+      );
+    }
   };
 
   return (
