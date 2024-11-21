@@ -10,6 +10,13 @@ services:
         condition: service_healthy
     networks:
       - dasher_net
+    
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    networks:
+      - dasher_net
   
   db:
     image: postgres:latest

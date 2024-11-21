@@ -1,6 +1,6 @@
 "use client"
 import { SideBar } from ".";
-import logo from "../../../assets/Chroma em Preto 1.svg";
+import logo from "../../../public/Chroma em Preto 1.svg";
 import {
   LayoutDashboard,
   FileSpreadsheet,
