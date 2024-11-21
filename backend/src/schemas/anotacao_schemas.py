@@ -12,4 +12,4 @@ class AnotacaoResponse(AnotacaoBase):
     id: int = Field(..., description="ID único da anotação")
 
     class Config:
-        orm_mode = True
+        from_attributes = True

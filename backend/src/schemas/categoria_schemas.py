@@ -14,4 +14,4 @@ class CategoriaResponse(CategoriaBase):
     id: int = Field(..., example=1, description="ID único da categoria")
 
     class Config:
-        orm_mode = True
+        from_attributes = True

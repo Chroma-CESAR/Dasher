@@ -18,8 +18,8 @@ class Movimentacao(Base):
     descricao = Column(String, nullable=False)
     tipo_operacao = Column(
         String,
-        CheckConstraint("tipo_operacao in ('Debito', 'Crédito')"),
+        CheckConstraint("tipo_operacao in ('Débito', 'Crédito')"),
         nullable=False
     )
     valor = Column(Numeric(10, 2), nullable=False)
-    observacoes = Column(Text)
+    banco = Column(String, nullable=False, default="N/A")

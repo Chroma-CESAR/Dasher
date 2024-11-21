@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
+from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.exc import IntegrityError, NoResultFound
 from fastcrud import FastCRUD
 from fastcrud import crud_router
@@ -19,6 +20,15 @@ from src.schemas.anotacao_schemas import AnotacaoCreate
 from src.schemas.metodo_pagamento_schemas import MetodoPagamentoCreate
 
 app = FastAPI(lifespan=lifespan)
+
+# Middlewares
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 categoria_crud = FastCRUD(Categoria)
 categoria_router = crud_router(

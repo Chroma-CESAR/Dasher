@@ -24,4 +24,4 @@ class DespesaResponse(DespesaBase):
     id: int = Field(..., example=1, description="ID único da despesa")
 
     class Config:
-        orm_mode = True
+        from_attributes = True
