@@ -33,7 +33,7 @@ export default function RootLayout({
   return (
     <html lang="pt-br">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${montserrat.variable} antialiased flex overflow-y-hidden`}
+        className={`${geistSans.variable} ${geistMono.variable} ${montserrat.variable} antialiased flex overflow-y-hidden bg-surface`}
       >
         <SideBarComplete />
         <div className="flex flex-col w-full">
