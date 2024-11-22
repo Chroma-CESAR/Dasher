@@ -3,7 +3,6 @@ import { Montserrat } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
 import SideBarComplete from "@/components/SideBar/SideBarComplete";
-import Header from "@/components/Header";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -38,7 +37,6 @@ export default function RootLayout({
       >
         <SideBarComplete />
         <div className="flex flex-col w-full">
-          <Header />
           {children}
         </div>
       </body>
