@@ -6,7 +6,7 @@ export default function Home() {
     <div>
       <Header classname="pr-6 pl-5" />
       <main className="flex flex-col h-screen justify-center items-center">
-        Main
+        Dashboard
       </main>
     </div>
   );

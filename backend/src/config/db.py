@@ -4,12 +4,12 @@ from sqlalchemy.orm import sessionmaker
 from src.config.base import Base
 from decouple import config as env
 from fastapi import FastAPI
+from src.config.seed import inserir_dados
 
 DATABASE_URL = env('DATABASE_URL')
 
 engine = create_async_engine(DATABASE_URL, echo=True)
 async_session = sessionmaker(bind=engine, class_=AsyncSession, expire_on_commit=False)
-
 
 # Database session dependency
 async def get_session() -> AsyncGenerator[AsyncSession, None]:
@@ -20,5 +20,13 @@ async def get_session() -> AsyncGenerator[AsyncSession, None]:
 async def lifespan(app: FastAPI):
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
-
+    
+    try:
+        await inserir_dados(async_session)
+        print("Dados inseridos com sucesso no lifespan!")
+    except Exception as e:
+        print(f"Erro ao inserir dados no lifespan: {str(e)}")
+    
     yield
+
+
