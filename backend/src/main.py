@@ -2,10 +2,12 @@ from fastapi import FastAPI
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.exc import IntegrityError, NoResultFound
+from sqlalchemy.ext.asyncio import AsyncSession
+from fastapi import Depends
 from fastcrud import FastCRUD
 from fastcrud import crud_router
 
-from src.config.db import get_session, lifespan
+from src.config.db import get_session, lifespan, inserir_dados
 
 from src.models.categoria import Categoria
 from src.models.despesa import Despesa

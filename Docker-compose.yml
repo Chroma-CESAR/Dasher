@@ -14,7 +14,7 @@ services:
   frontend:
     build: ./frontend
     ports:
-      - "3000:3000"
+      - "3001:3000"
     networks:
       - dasher_net
   
@@ -43,7 +43,11 @@ services:
       - "3002:3000"
     environment:
       - GF_SECURITY_ADMIN_USER=admin
+      - GF_AUTH_ANONYMOUS_ENABLED=true
       - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_SECURITY_ALLOW_EMBEDDING=true
+      - GF_AUTH_ANONYMOUS_ORG_ROLE=Viewer
+      - GF_SERVER_DOMAIN=localhost   
     depends_on:
       - db
     networks:
@@ -55,6 +59,7 @@ services:
   
 volumes:
   db_data:
+  grafana_data:
 
 networks:
   dasher_net:
