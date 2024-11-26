@@ -37,6 +37,20 @@ services:
       timeout: 5s
       retries: 5
     
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3002:3000"
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    depends_on:
+      - db
+    networks:
+      - dasher_net
+    volumes:
+      - grafana_data:/var/lib/grafana
+
     # Fazer o serviço do front end
   
 volumes:
