@@ -68,7 +68,7 @@ export default function Planilha() {
           <tbody>
             {movimentacoes.map((movimentacao, index) => (
               <tr
-                key={movimentacao.numero_documento}
+                key={`${movimentacao.numero_documento}-${page}-${index}`}
                 className={index % 2 === 0 ? "bg-surface-variant" : "bg-white"}
               >
                 <td className="px-4 py-2 text-left">
