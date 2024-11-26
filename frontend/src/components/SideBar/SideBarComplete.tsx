@@ -4,7 +4,6 @@ import logo from "../../../public/Chroma em Preto 1.svg";
 import {
   LayoutDashboard,
   FileSpreadsheet,
-  Library,
   PersonStanding,
   Settings,
 } from "lucide-react";
@@ -23,7 +22,6 @@ export default function SideBarComplete() {
           <SideBar.List>
             <SideBar.Item name="Dashboard" icon={LayoutDashboard} to="/" />
             <SideBar.Item name="Planilha" icon={FileSpreadsheet} to="/planilha" />
-            <SideBar.Item name="Dicionário" icon={Library} to="/dicionario" />
           </SideBar.List>
           <SideBar.List>
             <SideBar.Item name="Conta" icon={PersonStanding} />
