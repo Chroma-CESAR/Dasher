@@ -1,9 +1,7 @@
 import axios from "axios";
 
-// const baseURL = process.env.NEXT_PUBLIC_API_URL;
-//Não consegui passar a variável de ambiente pelo docker-compose
-
-const baseURL = "http://localhost:8001";
+const baseURL = process.env.NEXT_PUBLIC_API_URL;
+// Crie um arquivo .env.local dentro da pasta frontend e adicione a variável NEXT_PUBLIC_API_URL=http://localhost:8001/
 
 const axiosInstance = axios.create({
   baseURL,
