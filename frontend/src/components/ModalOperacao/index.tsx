@@ -70,7 +70,7 @@ export default function ModalOperacao() {
     console.log("Payload:", payload);
 
     try {
-      await axiosInstance.post("/movimentacoes", payload);
+      await axiosInstance.post("/movimentacoes_create", payload);
       alert("Operação cadastrada com sucesso!");
     } catch (error) {
       console.error("Erro ao cadastrar operação:", error);
@@ -301,8 +301,7 @@ export default function ModalOperacao() {
             />
 
             {/* Saldo */}
-            <div className="col-span-2 flex justify-between items-center border-t pt-4">
-              <p className="font-bold">Saldo: R$XX.XXX,XX</p>
+            <div className="col-span-2 flex justify-end items-center border-t pt-4">
               <div className="flex space-x-2">
                 <Button
                   variant="outline"

@@ -14,6 +14,7 @@ interface Movimentacao {
   tipo_operacao: string;
   valor: number;
   banco: string;
+  categoria: string;
 }
 
 interface MovimentacaoResponse {
@@ -68,6 +69,7 @@ export default function Planilha() {
             <thead>
               <tr className="bg-light-surface-bright">
                 <th className="px-4 py-2">Descricao</th>
+                <th className="px-4 py-2">Categoria</th>
                 <th className="px-4 py-2">Valor</th>
                 <th className="px-4 py-2">Data</th>
                 <th className="px-4 py-2">Número Documento</th>
@@ -86,6 +88,7 @@ export default function Planilha() {
                   <td className="px-4 py-2 text-left">
                     {movimentacao.descricao}
                   </td>
+                  <td className="px-4 py-2">{movimentacao.categoria}</td>
                   <td className="px-4 py-2">
                     {Number(movimentacao.valor).toLocaleString("pt-BR", {
                       style: "currency",
