@@ -37,8 +37,8 @@ Certifique-se de ter os seguintes itens instalados no seu sistema:
 
 - [Docker](https://www.docker.com/)
 - [Docker Compose](https://docs.docker.com/compose/)
-- [Node.js](https://nodejs.org/) (se necessário para desenvolvimento local do frontend)
-- [Python/Java/Outra linguagem (dependendo do backend)](https://www.python.org/) (se necessário para desenvolvimento local do backend)
+- [Node.js](https://nodejs.org/) 
+- [Python](https://www.python.org/)
 
 ---
 
@@ -59,8 +59,8 @@ Certifique-se de ter os seguintes itens instalados no seu sistema:
    ```
 
 4. Acesse o aplicativo:
-   - O **frontend** estará disponível em `http://localhost:3000` (ou a porta configurada).
-   - O **backend** estará disponível em `http://localhost:5000` (ou a porta configurada).
+   - O **frontend** estará disponível em `http://localhost:3000`.
+   - O **backend** estará disponível em `http://localhost:5000`.
 
 ---
 
@@ -96,27 +96,3 @@ Dasher/
 └── .git/                # Controle de versão com Git
 ```
 
----
-
-## Contribuição
-
-1. Faça um fork do repositório.
-2. Crie um branch para sua feature ou correção:
-   ```bash
-   git checkout -b minha-feature
-   ```
-3. Commit suas alterações:
-   ```bash
-   git commit -m "Descrição da feature ou correção"
-   ```
-4. Faça o push para o branch:
-   ```bash
-   git push origin minha-feature
-   ```
-5. Abra um Pull Request.
-
----
-
-## Licença
-
-Este projeto está licenciado sob a licença [MIT](LICENSE). Sinta-se à vontade para utilizá-lo e adaptá-lo.
