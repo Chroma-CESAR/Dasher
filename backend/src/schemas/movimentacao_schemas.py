@@ -16,6 +16,7 @@ class MovimentacaoCreate(MovimentacaoBase):
 
 class MovimentacaoResponse(MovimentacaoBase):
     id: int = Field(..., description="ID único da movimentação")
+    categoria: str = Field(..., description="Categoria da movimentação")
     
     class Config:
         from_attributes = True
