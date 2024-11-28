@@ -1,6 +1,27 @@
 from datetime import date, datetime
-from src.models.movimentacao import Movimentacao
 from sqlalchemy.ext.asyncio import AsyncSession
+import joblib
+
+from src.models.movimentacao import Movimentacao
+from src.utils.tratar_dados import tratar_dados
+
+rf_model = joblib.load("modelos/rf_model.pkl")
+vectorizer = joblib.load("modelos/tfidf_vectorizer.pkl")
+
+mapeamento_categorias = {
+    0: "Aluguel",
+    1: "Contas de Consumo",
+    2: "Despesas Diversas",
+    3: "Educação",
+    4: "Empréstimos",
+    5: "Equipamentos",
+    6: "Impostos e Taxas",
+    7: "Pagamentos e Créditos",
+    8: "Saúde",
+    9: "Seguros",
+    10: "Serviços Digitais",
+    11: "Transporte"
+}
 
 # Função para popular o banco de dados
 async def inserir_dados(async_session: AsyncSession):
@@ -11,7 +32,7 @@ async def inserir_dados(async_session: AsyncSession):
     try:
         async with async_session() as session:
             async with session.begin():
-               session.add_all([
+               movimentacoes = [
                     Movimentacao(data_movimentacao=convert_date("2023-01-04"), numero_documento="33980074", descricao="CREDITO TED - PAGSEGURO INTERNET LTDA", tipo_operacao="Crédito", valor=1569.94, banco="CAIXA"),
                     Movimentacao(data_movimentacao=convert_date("2023-01-05"), numero_documento="10003309", descricao="PG.P/INTERNET - CONTA DE AGUA", tipo_operacao="Débito", valor=-170.01, banco="CAIXA"),
                     Movimentacao(data_movimentacao=convert_date("2023-01-06"), numero_documento="34321522", descricao="CREDITO TED - PAGSEGURO INTERNET LTDA", tipo_operacao="Crédito", valor=194.72, banco="CAIXA"),
@@ -525,10 +546,18 @@ async def inserir_dados(async_session: AsyncSession):
                     Movimentacao(data_movimentacao=convert_date("2024-08-16"), numero_documento="10003415", descricao="PG.P/INTERNET - ENERGIA LJ 3", tipo_operacao="Débito", valor=-211.1, banco="CAIXA"),
                     Movimentacao(data_movimentacao=convert_date("2024-08-16"), numero_documento="10003427", descricao="PG.P/INTERNET - ENERGIA LJ 4", tipo_operacao="Débito", valor=-67.48, banco="CAIXA"),
                     Movimentacao(data_movimentacao=convert_date("2024-08-16"), numero_documento="10003439", descricao="PG.P/INTERNET - ENERGIA LJ 6", tipo_operacao="Débito", valor=-553.96, banco="CAIXA")   
-                ])
+                ]
+            
+            for mov in movimentacoes:
+                descricao_limpa = tratar_dados(mov.descricao)
+                descricao_tfidf = vectorizer.transform([descricao_limpa])
+                categoria = rf_model.predict(descricao_tfidf)[0]
+                mov.categoria = mapeamento_categorias[categoria]
+            
+            session.add_all(movimentacoes)
             await session.commit()
-            print("Dados inseridos com sucesso!")
+            print("\033[32mDados inseridos com sucesso!\033[0m")
     except Exception as e:
-        print(f"Erro ao inserir dados: {str(e)}")
+        print(f"\033[31mErro ao inserir dados: {str(e)}\033[0m")
         await session.rollback()
         raise  # Re-lança a exceção para não silenciar o erro
