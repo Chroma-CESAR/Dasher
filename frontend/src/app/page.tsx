@@ -16,16 +16,16 @@ export default function Home() {
             src={`${urlGrafana}${graph1}`}
             className="w-full h-64 border rounded-lg shadow-lg"
           ></iframe>
-          <iframe
-            src={`${urlGrafana}${graph2}`}
-            className="w-full h-64 border rounded-lg shadow-lg"
-          ></iframe>
+            <iframe
+              src={`${urlGrafana}${graph4}`}
+              className="w-full h-64 border rounded-lg shadow-lg"
+            ></iframe>
           <iframe
             src={`${urlGrafana}${graph3}`}
             className="w-full h-64 border rounded-lg shadow-lg"
           ></iframe>
           <iframe
-            src={`${urlGrafana}${graph4}`}
+            src={`${urlGrafana}${graph2}`}
             className="w-full h-64 border rounded-lg shadow-lg"
           ></iframe>
         </div>
