@@ -5,6 +5,8 @@ from src.config.base import Base
 from decouple import config as env
 from fastapi import FastAPI
 from src.config.seed import inserir_dados
+from sqlalchemy.future import select
+from src.models.movimentacao import Movimentacao
 
 DATABASE_URL = env('DATABASE_URL')
 
@@ -22,8 +24,14 @@ async def lifespan(app: FastAPI):
         await conn.run_sync(Base.metadata.create_all)
     
     try:
-        await inserir_dados(async_session)
-        print("\033[32mDados inseridos com sucesso no lifespan!\033[0m")
+        async with async_session() as session:
+            result = await session.execute(select(Movimentacao))
+            if result.scalars().first() is None:
+                await inserir_dados(async_session)
+                print("\033[32mDados inseridos com sucesso no lifespan!\033[0m")
+            else:
+                 print("\033[33mTabela já contém dados. Seed não será executado.\033[0m")
+                
     except Exception as e:
         print(f"\033[31mErro ao inserir dados no lifespan: {str(e)}\033[0m")
     
