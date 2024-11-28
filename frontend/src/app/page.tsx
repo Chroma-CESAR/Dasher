@@ -10,16 +10,16 @@ export default function Home() {
   return (
     <div>
       <Header classname="pr-6 pl-5" />
-      <main className="flex flex-col h-screen">
-        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-6 p-6 w-full">
+      <main className="flex flex-col h-screen pb-20 sm:pb-0">
+        <div className="grid grid-cols-1 overflow-auto sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-6 p-6 w-full">
           <iframe
             src={`${urlGrafana}${graph1}`}
             className="w-full h-64 border rounded-lg shadow-lg"
           ></iframe>
-            <iframe
-              src={`${urlGrafana}${graph4}`}
-              className="w-full h-64 border rounded-lg shadow-lg"
-            ></iframe>
+          <iframe
+            src={`${urlGrafana}${graph4}`}
+            className="w-full h-64 border rounded-lg shadow-lg"
+          ></iframe>
           <iframe
             src={`${urlGrafana}${graph3}`}
             className="w-full h-64 border rounded-lg shadow-lg"
@@ -32,5 +32,6 @@ export default function Home() {
       </main>
     </div>
   );
+  
 }
 
