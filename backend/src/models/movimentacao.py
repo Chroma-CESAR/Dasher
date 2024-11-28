@@ -23,3 +23,4 @@ class Movimentacao(Base):
     )
     valor = Column(Numeric(10, 2), nullable=False)
     banco = Column(String, nullable=False, default="N/A")
+    categoria = Column(String, nullable=True)

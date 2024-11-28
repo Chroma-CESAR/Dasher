@@ -23,10 +23,8 @@ async def lifespan(app: FastAPI):
     
     try:
         await inserir_dados(async_session)
-        print("Dados inseridos com sucesso no lifespan!")
+        print("\033[32mDados inseridos com sucesso no lifespan!\033[0m")
     except Exception as e:
-        print(f"Erro ao inserir dados no lifespan: {str(e)}")
+        print(f"\033[31mErro ao inserir dados no lifespan: {str(e)}\033[0m")
     
     yield
-
-
