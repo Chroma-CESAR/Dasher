@@ -4,24 +4,12 @@ import joblib
 
 from src.models.movimentacao import Movimentacao
 from src.utils.tratar_dados import tratar_dados
+from src.utils.mapeamento_categorias import mapeamento_categorias
 
 rf_model = joblib.load("modelos/rf_model.pkl")
 vectorizer = joblib.load("modelos/tfidf_vectorizer.pkl")
 
-mapeamento_categorias = {
-    0: "Aluguel",
-    1: "Contas de Consumo",
-    2: "Despesas Diversas",
-    3: "Educação",
-    4: "Empréstimos",
-    5: "Equipamentos",
-    6: "Impostos e Taxas",
-    7: "Pagamentos e Créditos",
-    8: "Saúde",
-    9: "Seguros",
-    10: "Serviços Digitais",
-    11: "Transporte"
-}
+
 
 # Função para popular o banco de dados
 async def inserir_dados(async_session: AsyncSession):
